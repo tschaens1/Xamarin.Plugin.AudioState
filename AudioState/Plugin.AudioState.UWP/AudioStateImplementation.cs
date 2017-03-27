@@ -29,12 +29,9 @@ namespace Plugin.AudioState
         public double CurrentOutputLatency => throw new NotImplementedException();
 
         /// <inheritdoc/>
-        public OutputRoute CurrentOutputRoute { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public OutputRoute CurrentOutputRoute => throw new NotImplementedException();
 
         /// <inheritdoc/>
-        public double CurrentOutputVolume(OutputRoute? outputRoute = default(OutputRoute?))
-        {
-            throw new NotImplementedException();
-        }
+        public double CurrentOutputVolume(OutputRoute? outputRoute = default(OutputRoute?)) => throw new NotImplementedException();
     }
 }

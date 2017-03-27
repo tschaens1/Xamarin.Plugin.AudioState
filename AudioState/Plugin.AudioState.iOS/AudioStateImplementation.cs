@@ -46,21 +46,7 @@ namespace Plugin.AudioState
         public double CurrentOutputVolume(OutputRoute? outputRoute = null) => Session.OutputVolume;
 
         /// <inheritdoc/>
-        public OutputRoute CurrentOutputRoute
-        {
-            get => GetCurrentOutputRoute();
-            set
-            {
-                if (OutputRoute.InternalSpeaker.Equals(value) || OutputRoute.ExternalSpeaker.Equals(value))
-                {
-                    Session.OverrideOutputAudioPort(AVAudioSessionPortOverride.Speaker, out var error);
-                }
-                else
-                {
-                    Session.OverrideOutputAudioPort(AVAudioSessionPortOverride.None, out var error);
-                }
-            }
-        }
+        public OutputRoute CurrentOutputRoute => GetCurrentOutputRoute();
 
         #endregion
 

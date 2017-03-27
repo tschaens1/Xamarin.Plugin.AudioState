@@ -30,8 +30,8 @@
         double CurrentOutputVolume(OutputRoute? outputRoute = null);
 
         /// <summary>
-        /// Gets or sets the current <see cref="OutputRoute"/>
+        /// Gets the current <see cref="OutputRoute"/>
         /// </summary>
-        OutputRoute CurrentOutputRoute { get; set; }
+        OutputRoute CurrentOutputRoute { get; }
     }
 }

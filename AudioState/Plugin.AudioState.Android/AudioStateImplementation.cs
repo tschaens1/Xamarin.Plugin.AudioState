@@ -34,14 +34,7 @@ namespace Plugin.AudioState
         }
 
         /// <inheritdoc/>
-        public OutputRoute CurrentOutputRoute
-        {
-            get => throw new NotImplementedException();
-            set
-            {
-                AudioManager.SpeakerphoneOn = true;
-            }
-        }
+        public OutputRoute CurrentOutputRoute => throw new NotImplementedException();
 
         /// <inheritdoc/>
         private double GetAudioOutputLatency()
