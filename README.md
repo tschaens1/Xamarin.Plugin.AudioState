@@ -1,4 +1,4 @@
-# Xamarin.Plugin.AudioState
+﻿# Xamarin.Plugin.AudioState
 
 The AudioState plugin for Xamarin and Xamarin.Forms applications will add some cross-platform audio checks to your application.
 
@@ -12,7 +12,7 @@ Coming soon.
 
 ## Versioning
 
-Current version is v0.8.0.0, the 1.0 major release will have a Nuget package as an output.
+Current version is v0.1.0.0, the 1.0 major release will have a Nuget package as an output.
 
 ## Authors
 
