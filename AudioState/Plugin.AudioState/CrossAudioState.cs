@@ -12,7 +12,7 @@ namespace Plugin.AudioState
         static Lazy<IAudioState> Implementation = new Lazy<IAudioState>(() => CreateAudioState(), LazyThreadSafetyMode.PublicationOnly);
 
         /// <summary>
-        /// Current IAudioState instance as lazy singleton
+        /// Current <see cref="IAudioState"/> instance as lazy singleton.
         /// </summary>
         public static IAudioState Current
         {

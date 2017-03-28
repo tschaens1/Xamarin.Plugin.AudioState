@@ -15,39 +15,39 @@ Coming soon.
 ```csharp
 
 /// <summary>
-/// Indicates whether any app is currently playing music in the background
+/// Indicates whether any app is currently playing music in the background.
 /// </summary>
-/// <returns><c>true</c> if music is playing, <c>false</c> otherwise</returns>
+/// <returns><c>true</c> if music is playing, <c>false</c> otherwise.</returns>
 bool IsMusicPlaying { get; }
 
 /// <summary>
-/// Indicates whether headset is connected to the phone
+/// Indicates whether headset is connected to the phone.
 /// </summary>
-/// <returns><c>true</c> if headset is connected, <c>false</c> otherwise</returns>
+/// <returns><c>true</c> if headset is connected, <c>false</c> otherwise.</returns>
 bool IsHeadsetConnected { get; }
 
 /// <summary>
-/// Returns the current audio output latency
+/// Returns the current audio output latency.
 /// </summary>
 double CurrentOutputLatency { get; }
 
 /// <summary>
-/// Returns the current audio output volume
-/// </summary>
-/// <param name="outputRoute">The <see cref="OutputRoute"/> to check the output volume on</param>
-/// <returns>The current audio output volume on the specified (default if null) channel</returns>
-double CurrentOutputVolume(OutputRoute? outputRoute = null);
-
-/// <summary>
-/// Gets the current <see cref="OutputRoute"/>
+/// Gets the current <see cref="OutputRoute"/>.
 /// </summary>
 OutputRoute CurrentOutputRoute { get; }
+
+/// <summary>
+/// Returns the current audio output volume.S
+/// </summary>
+/// <param name="outputRoute">The <see cref="OutputRoute"/> to check the output volume on.</param>
+/// <returns>The current audio output volume on the specified (default if null) channel.</returns>
+double CurrentOutputVolume(OutputRoute? outputRoute = default(OutputRoute?));
 
 ```
 
 ## Versioning
 
-The current version is v0.1.0.0, I will try to release the package via NuGet as soon as possible.
+The current version is v0.1.0, I will try to release the package via NuGet as soon as possible.
 
 ## Version history
 

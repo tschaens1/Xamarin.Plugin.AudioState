@@ -5,14 +5,14 @@ using System;
 namespace Plugin.AudioState
 {
     /// <summary>
-    /// Implementation of IAudioState
+    /// Implementation of <see cref="IAudioState"/>
     /// </summary>
     public class AudioStateImplementation : IAudioState, IDisposable
     {
         #region Properties
 
         /// <summary>
-        /// Holds the current <see cref="AVAudioSession"/> as singleton
+        /// Holds the current <see cref="AVAudioSession"/> as singleton.
         /// </summary>
         protected readonly AVAudioSession Session = AVAudioSession.SharedInstance();
 
@@ -33,20 +33,20 @@ namespace Plugin.AudioState
 
         #region Properties defined by the interface
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="IAudioState"/>
         public bool IsMusicPlaying => Session.OtherAudioPlaying;
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="IAudioState"/>
         public bool IsHeadsetConnected => OutputRoute.HeadphoneJack.Equals(CurrentOutputRoute);
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="IAudioState"/>
         public double CurrentOutputLatency => Session.OutputLatency;
 
-        /// <inheritdoc/>
-        public double CurrentOutputVolume(OutputRoute? outputRoute = null) => Session.OutputVolume;
-
-        /// <inheritdoc/>
+        /// <inheritdoc cref="IAudioState"/>
         public OutputRoute CurrentOutputRoute => GetCurrentOutputRoute();
+
+        /// <inheritdoc cref="IAudioState"/>
+        public double CurrentOutputVolume(OutputRoute? outputRoute = null) => Session.OutputVolume;
 
         #endregion
 
