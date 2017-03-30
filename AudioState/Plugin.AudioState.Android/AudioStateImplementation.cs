@@ -11,13 +11,23 @@ namespace Plugin.AudioState
     /// </summary>
     public class AudioStateImplementation : IAudioState, IDisposable
     {
+        #region Constants
+
         private const string MethodGetLatency = "getOutputLatency";
         private const string IntentFilterState = "state";
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Holds the <see cref="Android.Media.AudioManager"/> in the current <see cref="Context"/>.
         /// </summary>
         protected static readonly AudioManager AudioManager = (AudioManager)Application.Context.GetSystemService(Context.AudioService);
+
+        #endregion
+
+        #region Public methods inherited from IAudioState
 
         /// <inheritdoc cref="IAudioState"/>
         public bool IsMusicPlaying => AudioManager.IsMusicActive;
@@ -29,19 +39,32 @@ namespace Plugin.AudioState
         public double CurrentOutputLatency => GetAudioOutputLatency();
 
         /// <inheritdoc cref="IAudioState"/>
-        public OutputRoute CurrentOutputRoute
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public OutputRoute CurrentOutputRoute => GetCurrentOutputRoute();
 
         /// <inheritdoc cref="IAudioState"/>
         public double CurrentOutputVolume(OutputRoute? outputRoute = default(OutputRoute?))
         {
-            return AudioManager.GetStreamVolume(Stream.Music);
+            Stream stream;
+
+            if (OutputRoute.HeadphoneJack.Equals(outputRoute))
+            {
+                stream = Stream.Music;
+            }
+            else if (OutputRoute.Default.Equals(outputRoute))
+            {
+                stream = Stream.Ring;
+            }
+            else
+            {
+                stream = Stream.Alarm;
+            }
+
+            return AudioManager.GetStreamVolume(stream);
         }
+
+        #endregion
+
+        #region Private helper methods
 
         private static double GetAudioOutputLatency()
         {
@@ -58,17 +81,37 @@ namespace Plugin.AudioState
 
         private static bool GetItHeadsetConnected()
         {
-            var filter = new IntentFilter(AudioManager.ActionHeadsetPlug);
-            var status = Application.Context.RegisterReceiver(null, filter);
+            var headsetFilter = new IntentFilter(AudioManager.ActionHeadsetPlug);
+            var status = Application.Context.RegisterReceiver(null, headsetFilter);
             return status.GetIntExtra(IntentFilterState, 0) == 1;
         }
+
+        private OutputRoute GetCurrentOutputRoute()
+        {
+            if (AudioManager.SpeakerphoneOn)
+            {
+                return OutputRoute.InternalSpeaker;
+            }
+            else if (AudioManager.BluetoothScoOn || AudioManager.BluetoothA2dpOn)
+            {
+                return OutputRoute.ExternalSpeaker;
+            }
+            else if (IsHeadsetConnected)
+            {
+                return OutputRoute.HeadphoneJack;
+            }
+
+            return OutputRoute.Unknown;
+        }
+
+        #endregion
 
         /// <summary>
         /// Disposes the <see cref="Android.Media.AudioManager"/>
         /// </summary>
         public void Dispose()
         {
-            AudioManager.Dispose();
+            AudioManager?.Dispose();
         }
     }
 }

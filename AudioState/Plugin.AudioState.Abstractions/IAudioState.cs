@@ -28,10 +28,10 @@
         OutputRoute CurrentOutputRoute { get; }
 
         /// <summary>
-        /// Returns the current audio output volume.S
+        /// Returns the current audio output volume.
         /// </summary>
         /// <param name="outputRoute">The <see cref="OutputRoute"/> to check the output volume on.</param>
-        /// <returns>The current audio output volume on the specified (default if null) channel.</returns>
+        /// <returns>The current audio output volume on the specified channel.</returns>
         double CurrentOutputVolume(OutputRoute? outputRoute = default(OutputRoute?));
     }
 }

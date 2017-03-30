@@ -31,7 +31,7 @@ namespace Plugin.AudioState
 
         #endregion
 
-        #region Properties defined by the interface
+        #region Public methods inherited from IAudioState
 
         /// <inheritdoc cref="IAudioState"/>
         public bool IsMusicPlaying => Session.OtherAudioPlaying;
@@ -50,7 +50,7 @@ namespace Plugin.AudioState
 
         #endregion
 
-        #region Helper methods
+        #region Private helper methods
 
         private OutputRoute GetCurrentOutputRoute()
         {
@@ -89,7 +89,7 @@ namespace Plugin.AudioState
         /// </summary>
         public void Dispose()
         {
-            Session.Dispose();
+            Session?.Dispose();
         }
     }
 }
