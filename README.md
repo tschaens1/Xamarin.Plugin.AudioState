@@ -1,14 +1,25 @@
-﻿# Xamarin.Plugin.AudioState
+# Xamarin.Plugin.AudioState
 
-The AudioState plugin for Xamarin and Xamarin.Forms applications will add some cross-platform audio checks to your application.
+The AudioState plugin for Xamarin and Xamarin.Forms applications will add some cross-platform audio checks to your application:
+
+* Check if there is any music playing in the background
+* Check if a wired headset is connected to the headphone jack
+* Get the current output latency
+* Get the current main audio output route
+* Get the volume on any output route
 
 ## Getting Started
 
 Coming soon.
 
-### Prerequisites
+### Supported Platforms
 
-Coming soon.
+|Platform|Supported|Version|
+| ------------------- | :-----------: | :------------------: |
+|Xamarin.iOS|Yes|iOS 8+|
+|Xamarin.iOS Unified|Yes|iOS 8+|
+|Xamarin.Android|Yes|API 10+|
+|Windows 10 UWP|Yes|Coming soon|
 
 ### Using the API
 
@@ -37,10 +48,10 @@ double CurrentOutputLatency { get; }
 OutputRoute CurrentOutputRoute { get; }
 
 /// <summary>
-/// Returns the current audio output volume.S
+/// Returns the current audio output volume.
 /// </summary>
 /// <param name="outputRoute">The <see cref="OutputRoute"/> to check the output volume on.</param>
-/// <returns>The current audio output volume on the specified (default if null) channel.</returns>
+/// <returns>The current audio output volume on the specified channel.</returns>
 double CurrentOutputVolume(OutputRoute? outputRoute = default(OutputRoute?));
 
 ```
