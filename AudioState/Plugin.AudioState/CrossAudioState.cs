@@ -9,7 +9,7 @@ namespace Plugin.AudioState
     /// </summary>
     public class CrossAudioState
     {
-        static Lazy<IAudioState> Implementation = new Lazy<IAudioState>(() => CreateAudioState(), LazyThreadSafetyMode.PublicationOnly);
+        static Lazy<IAudioState> Implementation = new Lazy<IAudioState>(CreateAudioState, LazyThreadSafetyMode.PublicationOnly);
 
         /// <summary>
         /// Current <see cref="IAudioState"/> instance as lazy singleton.

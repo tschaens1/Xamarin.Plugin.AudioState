@@ -11,13 +11,6 @@ namespace Plugin.AudioState
     /// </summary>
     public class AudioStateImplementation : IAudioState, IDisposable
     {
-        #region Constants
-
-        private const string MethodGetLatency = "getOutputLatency";
-        private const string IntentFilterState = "state";
-
-        #endregion
-
         #region Properties
 
         /// <summary>
@@ -70,8 +63,10 @@ namespace Plugin.AudioState
         {
             try
             {
-                var latencyMethod = AudioManager?.Class.GetMethod(MethodGetLatency, Java.Lang.Integer.Type);
-                return (int)latencyMethod?.Invoke(AudioManager, Stream.Music.GetHashCode());
+                using (var latencyMethod = AudioManager?.Class.GetMethod("getOutputLatency", Java.Lang.Integer.Type))
+                {
+                    return (int)latencyMethod?.Invoke(AudioManager, Stream.Music.GetHashCode());
+                }
             }
             catch (MissingMethodException)
             {
@@ -81,9 +76,14 @@ namespace Plugin.AudioState
 
         private static bool GetItHeadsetConnected()
         {
-            var headsetFilter = new IntentFilter(AudioManager.ActionHeadsetPlug);
-            var status = Application.Context.RegisterReceiver(null, headsetFilter);
-            return status.GetIntExtra(IntentFilterState, 0) == 1;
+            Intent status;
+
+            using (var headsetFilter = new IntentFilter(AudioManager.ActionHeadsetPlug))
+            {
+                status = Application.Context.RegisterReceiver(null, headsetFilter);
+            }
+
+            return status.GetIntExtra("state", 0) == 1;
         }
 
         private OutputRoute GetCurrentOutputRoute()
